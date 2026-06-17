@@ -54,7 +54,7 @@ Simple concatenation treats image and text as independent. Cross-Modal Attention
 ## 📁 Project Structure
 
 ```
-├── best_notebook_kaggle.ipynb   # Main training notebook (Kaggle-ready)
+├── ovliviate.ipynb   # Main training notebook (Kaggle-ready)
 ├── README.md
 └── requirements.txt             # (optional) for local runs
 ```
@@ -77,43 +77,6 @@ your-kaggle-dataset/
 ```
 image_id, context, category, image_name, label
 ```
-
----
-
-## 🚀 Running on Kaggle
-
-### Step 1 — Upload your dataset
-Add your dataset via **Notebook Settings → Add Data**. Note the dataset slug (the part after `/kaggle/input/`).
-
-### Step 2 — (Recommended) Pre-download models
-To avoid internet dependency during training, pre-download models locally and upload as a separate Kaggle dataset:
-
-```python
-from transformers import CLIPProcessor, CLIPModel, AutoTokenizer, AutoModel
-
-CLIPProcessor.from_pretrained('openai/clip-vit-base-patch32').save_pretrained('./clip_model')
-CLIPModel.from_pretrained('openai/clip-vit-base-patch32').save_pretrained('./clip_model')
-AutoTokenizer.from_pretrained('csebuetnlp/banglabert').save_pretrained('./bangla_model')
-AutoModel.from_pretrained('csebuetnlp/banglabert').save_pretrained('./bangla_model')
-```
-
-### Step 3 — Configure paths
-In **Cell 2** of the notebook, set:
-
-```python
-DATASET_SLUG = 'your-dataset-name'   # ← your data slug
-CLIP_MODEL   = '/kaggle/input/your-models-dataset/clip_model'    # if pre-downloaded
-BANGLA_MODEL = '/kaggle/input/your-models-dataset/bangla_model'  # if pre-downloaded
-```
-
-### Step 4 — Enable GPU & Internet
-- **Settings → Accelerator → GPU T4 x2** (or P100)
-- **Settings → Internet → On** (needed if not pre-downloading models)
-
-### Step 5 — Run All
-Click **Run → Run All** and let it go. Outputs saved to `/kaggle/working/`.
-
----
 
 ## ⚙️ Hyperparameters
 
